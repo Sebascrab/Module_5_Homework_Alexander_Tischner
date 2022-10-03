@@ -1,7 +1,7 @@
 // Global Declerations
 
 // total amount of hours available
-let tHours = 12;
+let tHours = 24;
 // starts day off at 0700
 let startDay = moment().startOf('day').add(6, 'h');
 // current hour time
@@ -24,9 +24,9 @@ currentDate();
 
 // setting up the time blocks 
 function setUpTable() {
-    for(let i = 0; i < tHours; i++ ) {
-        let present = i + 12;
-        timeBlock = startDay.add(1,'h').format('HH:mm: a');
+    for (let hour = 0; hour < tHours; hour++ ) {
+        let present = hour + 12;
+        timeBlock = startDay.add(1,'h').format('HH:mm: A');
 
         // setting up colors based on past present and future
         if (rightNow < present) {
@@ -38,17 +38,9 @@ function setUpTable() {
         }
 
 
-        var appendBlock = 
-            `<div id="hour-${present}" class="row time-block ${time}">
-                <div class="col-md-1 hour">${setUpTable}</div>
-                <textarea class="col-md-10 description ${time}"></textarea>
-                <button class="btn saveBtn col-md-1">
-                    <i class="fas fa-save"></i>
-                </button>
-            </div>`;
-
-        $(".container").append(appendBlock);
     }
+
+
 }
 
 setUpTable();
@@ -67,7 +59,13 @@ setUpTable();
 
 
 
-
+// if (rightNow < present) {
+//             time = 'past';
+//         } else if (rightNow > present) {
+//             time = 'future';
+//         } else {
+//             rightNow ='present'
+//         }
 
 
 
