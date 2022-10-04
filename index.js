@@ -1,77 +1,39 @@
-// Global Declerations
-
-// total amount of hours available
-let tHours = 24;
-// starts day off at 0700
-let startDay = moment().startOf('day').add(6, 'h');
-// current hour time
-let rightNow = moment().format('H');   
-// past present future items
-let time;
-// time-block set up
-let timeBlock;
-
-
 
 
 // function for current date in header:
-
 function currentDate() {
     let todaysDate = moment().format('MMMM Do YYYY, h:mm:ss a');
     $("#currentDay").text(todaysDate);
 }
-currentDate();
-
-// setting up the time blocks 
-function setUpTable() {
-    for (let hour = 0; hour < tHours; hour++ ) {
-        let present = hour + 12;
-        timeBlock = startDay.add(1,'h').format('HH:mm: A');
-
-        // setting up colors based on past present and future
-        if (rightNow < present) {
-            time = 'past';
-        } else if (rightNow > present) {
-            time = 'future';
+setInterval(currentDate, 1000);
+let currentHour = new Date().getHours();
+console.log(currentHour)
+for (let i = 9; i < 18; i++) {
+    let colorKey = '';
+    if (i < currentHour) {
+        colorKey = 'past'
+    } else if (i === currentHour) {
+        colorKey = 'present'
+    } else {
+        colorKey = 'future'
+    } 
+    let hourDisplay = '';
+        if (i < 12) {
+            hourDisplay = i+'am';
+        } else if (i === 12) {
+            hourDisplay = i+'pm'
         } else {
-            rightNow ='present'
+            hourDisplay = i-12+'pm'
         }
-
-
-    }
-
-
+    let row = $('<div>').addClass('row').attr('id', i);
+    let hour = $('<div>').addClass('col-2').text(hourDisplay);
+    let textArea = $('<textarea>').addClass('col-8 ' + colorKey).val(localStorage.getItem(i))
+    let saveBtn = $('<button>').addClass('col-2 btn btn-primary').attr('id', i).click(function() {
+       let hourKey = $(this).attr('id')
+       let activity = $(this).siblings('.col-8').val()
+       localStorage.setItem(hourKey, activity)
+    })
+    let icon = $('<i>').addClass('fas fa-save')
+    $('.container').append(row.append(hour,textArea,saveBtn.append(icon)))
 }
-
-setUpTable();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// if (rightNow < present) {
-//             time = 'past';
-//         } else if (rightNow > present) {
-//             time = 'future';
-//         } else {
-//             rightNow ='present'
-//         }
-
-
-
-
-
-
-
-
 
