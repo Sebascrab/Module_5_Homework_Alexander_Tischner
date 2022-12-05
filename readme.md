@@ -42,5 +42,7 @@
   Email: alexanders.tischner@outlook.com 
 
 ![image of my project](./assets/images/Sebastian's%20Work%20Day%20Scheduler.png)
+
+Deployed: https://sebascrab.github.io/Work-Day-Scheduler-Using-Third-Party-APIs/
   
 
